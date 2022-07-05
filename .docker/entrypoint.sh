@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# if [ ! -f ".env" ]; then
-# 	cp .env.example .env
-# fi
+if [ ! -f ".env.local" ]; then
+    cp .env.local.example .env.local
+fi
 
-# npm install
+npm install
 
 tail -f /dev/null
 
