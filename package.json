@@ -21,7 +21,7 @@
     "@react-keycloak/ssr": "^3.3.0",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
-    "keycloak-js": "^18.0.1",
+    "keycloak-js": "^15.0.2",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

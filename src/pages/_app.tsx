@@ -25,9 +25,17 @@ export default function MyApp(props: MyAppProps & { cookies: any }) {
     cookies,
   } = props;
   return (
+    //@ts-expect-error
     <SSRKeycloakProvider
       keycloakConfig={KEYCLOAK_PUBLIC_CONFIG}
       persistor={SSRCookies(cookies)}
+      initOptions={{
+        onLoad: "check-sso",
+        silentCheckSsoRedirectUri:
+          typeof window !== "undefined"
+            ? `${window.location.origin}/silent-check-sso.html`
+            : null,
+      }}
     >
       <CacheProvider value={emotionCache}>
         <Head>
