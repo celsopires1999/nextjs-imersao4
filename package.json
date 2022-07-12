@@ -19,12 +19,16 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "@react-keycloak/ssr": "^3.3.0",
+    "@types/jsonwebtoken": "^8.5.8",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
+    "date-fns": "^2.28.0",
+    "jsonwebtoken": "^8.5.1",
     "keycloak-js": "^15.0.2",
     "next": "12.2.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.33.1"
   },
   "devDependencies": {
     "@types/cookie": "^0.5.1",
