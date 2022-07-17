@@ -14,14 +14,15 @@ import {
   TableHeaderRow,
   Toolbar,
 } from "@devexpress/dx-react-grid-material-ui";
-import { Button, Container, Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { Token, validateAuth } from "../../utils/auth";
-import makeHttp, { http } from "../../utils/http";
+import makeHttp from "../../utils/http";
 import { Transaction } from "../../utils/models";
 import { parseISO, format } from "date-fns";
 import AddIcon from "@mui/icons-material/Add";
-import router from "next/router";
+import { useRouter } from "next/router";
+import { Page } from "../../components/Page";
 
 interface TransactionsPageProps {
   transactions: Transaction[];
@@ -56,9 +57,10 @@ const columns: Column[] = [
   },
 ];
 const TransactionsPage: NextPage<TransactionsPageProps> = (props) => {
+  const router = useRouter();
   const { transactions } = props;
   return (
-    <Container>
+    <Page>
       <Typography component="h1" variant="h4">
         Minhas Transações
       </Typography>
@@ -86,7 +88,7 @@ const TransactionsPage: NextPage<TransactionsPageProps> = (props) => {
           <IntegratedPaging />
         </Grid>
       </Paper>
-    </Container>
+    </Page>
   );
 };
 

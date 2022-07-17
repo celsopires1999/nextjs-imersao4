@@ -1,6 +1,5 @@
 import {
   Button,
-  Container,
   Grid,
   TextField,
   Typography,
@@ -11,13 +10,17 @@ import {
   TransactionCategoryLabels,
   TransactionTypeLabels,
 } from "../../utils/models";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 import makeHttp from "../../utils/http";
+import { Page } from "../../components/Page";
+import { useKeycloak } from "@react-keycloak/ssr";
 
 const TransactionsNewPage: NextPage = () => {
+  const router = useRouter();
   const { register, handleSubmit } = useForm();
+  const { initialized, keycloak } = useKeycloak();
 
   function onSubmit(data: any) {
     try {
@@ -28,8 +31,17 @@ const TransactionsNewPage: NextPage = () => {
     }
   }
 
-  return (
-    <Container>
+  if (
+    typeof window !== "undefined" &&
+    initialized &&
+    !keycloak?.authenticated
+  ) {
+    router.replace(`/login?from=${window!.location.pathname}`);
+    return null;
+  }
+
+  return keycloak?.authenticated ? (
+    <Page>
       <Typography component="h1" variant="h4">
         Nova transação
       </Typography>
@@ -97,8 +109,8 @@ const TransactionsNewPage: NextPage = () => {
           </Grid>
         </Grid>
       </form>
-    </Container>
-  );
+    </Page>
+  ) : null;
 };
 
 export default TransactionsNewPage;

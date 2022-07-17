@@ -22,6 +22,15 @@ const theme = createTheme({
         enableColorOnDark: true,
       },
     },
+    MuiCssBaseline: {
+      styleOverrides: {
+        "@global": {
+          "html, body, body>div": {
+            height: "100%",
+          },
+        },
+      },
+    },
   },
 });
 
