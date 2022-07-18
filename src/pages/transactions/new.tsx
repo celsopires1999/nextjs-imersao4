@@ -12,10 +12,11 @@ import {
 } from "../../utils/models";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import makeHttp from "../../utils/http";
 import { Page } from "../../components/Page";
 import { useKeycloak } from "@react-keycloak/ssr";
+import { validateAuth } from "../../utils/auth";
 
 const TransactionsNewPage: NextPage = () => {
   const router = useRouter();
@@ -40,7 +41,7 @@ const TransactionsNewPage: NextPage = () => {
     return null;
   }
 
-  return keycloak?.authenticated ? (
+  return (
     <Page>
       <Typography component="h1" variant="h4">
         Nova transação
@@ -110,7 +111,20 @@ const TransactionsNewPage: NextPage = () => {
         </Grid>
       </form>
     </Page>
-  ) : null;
+  );
 };
 
 export default TransactionsNewPage;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const auth = validateAuth(ctx.req);
+  if (!auth) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+  return { props: {} };
+};

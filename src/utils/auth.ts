@@ -36,7 +36,7 @@ export function verifyToken(token: string, key: string): JwtPayload | false {
   }
 }
 
-export function createAuthCookies() {
+export function destroyAuthCookies() {
   destroyCookie("kcToken");
   destroyCookie("kcIdToken");
 }

@@ -11,7 +11,7 @@ export const Page: NextPage<PageProps> = (props) => {
   return (
     <>
       <Navbar />
-      <Container style={{ paddingTop: theme.spacing(1) }}>
+      <Container style={{ paddingTop: theme.spacing(10) }}>
         {props.children}
       </Container>
     </>

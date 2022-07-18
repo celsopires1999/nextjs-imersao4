@@ -1,12 +1,12 @@
 import { useKeycloak } from "@react-keycloak/ssr";
 import { KeycloakInstance } from "keycloak-js";
 import { GetServerSideProps } from "next";
-import { createAuthCookies, validateAuth } from "../utils/auth";
+import { validateAuth, destroyAuthCookies } from "../utils/auth";
 
 export default function LogoutPage() {
   const { initialized, keycloak } = useKeycloak<KeycloakInstance>();
   if (initialized && typeof window !== "undefined") {
-    createAuthCookies();
+    destroyAuthCookies();
     keycloak?.logout({
       redirectUri: window.location.origin + "/login",
     });

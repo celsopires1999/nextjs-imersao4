@@ -13,7 +13,7 @@ const Navbar: React.FunctionComponent = () => {
   const isLoading = !(initialized && keycloak?.authenticated && tenant);
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Menu />
           <StoreIcon />
