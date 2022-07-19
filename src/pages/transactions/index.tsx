@@ -15,14 +15,14 @@ import {
   Toolbar,
 } from "@devexpress/dx-react-grid-material-ui";
 import { Button, Paper, Typography } from "@mui/material";
-import { GetServerSideProps, NextPage } from "next";
-import { Token, validateAuth } from "../../utils/auth";
+import { NextPage } from "next";
 import makeHttp from "../../utils/http";
 import { Transaction } from "../../utils/models";
 import { parseISO, format } from "date-fns";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/router";
 import { Page } from "../../components/Page";
+import { withAuth } from "../../hof/withAuth";
 
 interface TransactionsPageProps {
   transactions: Transaction[];
@@ -94,18 +94,12 @@ const TransactionsPage: NextPage<TransactionsPageProps> = (props) => {
 
 export default TransactionsPage;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const auth = validateAuth(ctx.req);
-  if (!auth) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/login",
-      },
-    };
-  }
-
-  const token = (auth as Token).token;
+export const getServerSideProps = withAuth(async (ctx, { token }) => {
   const { data: transactions } = await makeHttp(token).get("transactions");
-  return { props: { transactions } };
-};
+
+  return {
+    props: {
+      transactions,
+    },
+  };
+});

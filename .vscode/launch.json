@@ -23,7 +23,9 @@
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
         "action": "debugWithChrome"
-      }
+      },
+      "smartStep": true,
+      "sourceMaps": true
     }
   ]
 }

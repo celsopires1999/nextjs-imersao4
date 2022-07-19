@@ -27,7 +27,7 @@ export const Menu = () => {
         <MenuItem
           onClick={() => {
             handleClose();
-            router.push("/transactions");
+            router.push("/");
           }}
         >
           Home
