@@ -13,14 +13,14 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const subdomain = req.subdomains.length ? req.subdomains[0] : false;
     try {
-      if (
-        !parsedUrl.pathname.startsWith("/_next") &&
-        parsedUrl.pathname.split(".").length < 2
-      ) {
-        if (subdomain) {
-          req.subdomain = subdomain;
-        }
+      // if (
+      //   !parsedUrl.pathname.startsWith("/_next") &&
+      //   parsedUrl.pathname.split(".").length < 2
+      // ) {
+      if (subdomain) {
+        req.subdomain = subdomain;
       }
+      // }
       handle(req, res, parsedUrl);
     } catch (e) {
       console.error(e);

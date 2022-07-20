@@ -6,6 +6,6 @@ fi
 
 npm install
 
-tail -f /dev/null
+# tail -f /dev/null
 
-# npm run dev
+npm run dev

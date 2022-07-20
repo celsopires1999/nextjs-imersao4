@@ -17,6 +17,7 @@ import makeHttp from "../../utils/http";
 import { Page } from "../../components/Page";
 import { useKeycloak } from "@react-keycloak/ssr";
 import { withAuth } from "../../hof/withAuth";
+import { Head } from "../../components/Head";
 
 const TransactionsNewPage: NextPage = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const TransactionsNewPage: NextPage = () => {
   function onSubmit(data: any) {
     try {
       makeHttp().post("transactions", data);
-      router.push("/transactions");
+      router.push("/");
     } catch (e) {
       console.error(e);
     }
@@ -43,6 +44,7 @@ const TransactionsNewPage: NextPage = () => {
 
   return (
     <Page>
+      <Head title="Nova transação" />
       <Typography component="h1" variant="h4">
         Nova transação
       </Typography>
@@ -116,7 +118,7 @@ const TransactionsNewPage: NextPage = () => {
 
 export default TransactionsNewPage;
 
-export const getServerSideProps = withAuth(async (ctx, { token }) => {
+export const getServerSideProps = withAuth(async () => {
   return {
     props: {},
   };

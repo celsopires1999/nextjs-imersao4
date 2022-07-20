@@ -23,6 +23,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/router";
 import { Page } from "../../components/Page";
 import { withAuth } from "../../hof/withAuth";
+import { Head } from "../../components/Head";
 
 interface TransactionsPageProps {
   transactions: Transaction[];
@@ -61,6 +62,7 @@ const TransactionsPage: NextPage<TransactionsPageProps> = (props) => {
   const { transactions } = props;
   return (
     <Page>
+      <Head title="Minhas transações" />
       <Typography component="h1" variant="h4">
         Minhas Transações
       </Typography>
